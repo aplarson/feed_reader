@@ -1,0 +1,18 @@
+<h1>Feeds</h1>
+<ul>
+<% feeds.forEach(function (feed) { %>
+  <li><a href="#feeds/<%=feed.id%>" ><%= feed.get('title') %></a>
+  <button class="delete" data-id ="<%=feed.id%>">Delete</button></li>
+<% }) %>
+</ul>
+
+
+<h3>Create a new feed</h3>
+<form id="new-feed-form">
+
+  <label>URL
+    <input type="text" name="feed[url]">
+  </label>
+  
+  <input type="submit" value="Create New Feed">
+</form>

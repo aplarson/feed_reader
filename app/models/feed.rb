@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: feeds
+#
+#  id         :integer          not null, primary key
+#  url        :string(255)      not null
+#  title      :string(255)      not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'open-uri'
 
 class Feed < ActiveRecord::Base
@@ -36,5 +47,12 @@ class Feed < ActiveRecord::Base
     rescue SimpleRSSError
       return false
     end
+  end
+  
+  def latest_entries
+    if self.updated_at < 30.seconds.ago
+      self.reload
+    end
+    self.entries
   end
 end
