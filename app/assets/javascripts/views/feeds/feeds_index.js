@@ -8,7 +8,8 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
   
   events: {
     "click button.delete": "deleteFeed",
-    "submit #new-feed-form": "createFeed"
+    "submit #new-feed-form": "createFeed",
+    "click button.follow": "followFeed"
   },
   
   render: function () {
@@ -31,6 +32,15 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
       success: function () {
         this.collection.add(model);
       }.bind(this)
+    })
+  },
+  
+  followFeed: function (event) {
+    event.preventDefault()
+    var id = $(event.currentTarget).data('id')
+    $.ajax({
+      url: "api/feeds/" + id + "/follows",
+      method: "post"
     })
   }
 

@@ -1,6 +1,8 @@
-<h1>Hello World</h1>
+<h1>Hello <%= current_user.username %></h1>
 <div id='content'></div>
 
 <a href="/">Index</a>
+
+<%= button_to "Sign Out", session_url, method: :delete %>
 
 <script></script>

@@ -1,9 +1,9 @@
-<h1>Feeds</h1>
+<h1>Your Feeds</h1>
 <ul>
 <% feeds.forEach(function (feed) { %>
   <li><a href="#feeds/<%=feed.id%>" ><%= feed.get('title') %></a>
   <button class="delete" data-id ="<%=feed.id%>">Delete</button>
-  <button class="follow" data-id ="<%=feed.id%>">Follow</button></li>
+  <button class="unfollow" data-id ="<%=feed.id%>">UnFollow</button></li>
 <% }) %>
 </ul>
 
@@ -17,5 +17,3 @@
   
   <input type="submit" value="Create New Feed">
 </form>
-
-<a href="#feeds/followed">Your Feeds</a>

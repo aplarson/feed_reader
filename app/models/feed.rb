@@ -13,6 +13,9 @@ require 'open-uri'
 
 class Feed < ActiveRecord::Base
   has_many :entries, :dependent => :destroy
+  
+  has_many :feed_follows, dependent: :destroy
+  has_many :followers, through: :feed_follows, source: :user
 
   def self.find_or_create_by_url(url)
     feed = Feed.find_by_url(url)

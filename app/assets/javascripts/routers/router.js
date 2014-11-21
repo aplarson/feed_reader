@@ -1,12 +1,14 @@
 NewsReader.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "feedIndex",
+    "feeds/followed": "followedFeeds",
     "feeds/:id": "feedShow"
   },
   
-  initialize: function(collection, $content){
+  initialize: function(collection, $content, followedFeeds){
     this.collection = collection;
     this.$content = $content;
+    this.followedFeeds = followedFeeds;
   },
   
   
@@ -20,6 +22,13 @@ NewsReader.Routers.Router = Backbone.Router.extend({
     var feed = this.collection.getOrFetch(id);
     feed.fetch();
     var view = new NewsReader.Views.FeedsShow({ model: feed });
+    this.$content.html(view.render().$el)
+  },
+  
+  followedFeeds: function () {
+    // debugger
+    this.followedFeeds.fetch();
+    var view = new NewsReader.Views.FollowedFeedsIndex(this.followedFeeds)
     this.$content.html(view.render().$el)
   }
 });

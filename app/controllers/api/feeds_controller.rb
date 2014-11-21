@@ -1,6 +1,6 @@
 class Api::FeedsController < ApplicationController
   def index
-    render :json => Feed.all
+    render :json => Feed.all, include: :feed_follows
   end
 
   def show 
@@ -18,8 +18,13 @@ class Api::FeedsController < ApplicationController
   
   def destroy
     feed = Feed.find(params[:id])
-    feed.destroy()
+    feed.destroy
     render :json => feed
+  end
+  
+  def followed
+    followed_feeds = current_user.feeds
+    render :json => followed_feeds
   end
 
   private
